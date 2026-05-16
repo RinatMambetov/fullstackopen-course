@@ -5,6 +5,15 @@ sequenceDiagram
     participant browser
     participant server
 
+    Note right of browser: When the button on the form is clicked HTTP POST request to the server address new_note
+
+    browser->>server: POTS https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser: HTTP status code 302  (URL redirect)
+    deactivate server
+
+    Note right of browser: This is a URL redirect, with which the server asks the browser to perform a new HTTP GET request to the address defined in the header's Location - the address notes ('/exampleapp/notes')
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
